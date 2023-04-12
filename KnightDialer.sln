@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33027.164
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnightDialer", "KnightDialer\KnightDialer.csproj", "{1B8C4FCE-74AB-48AC-B2DA-443EA85F1AD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnightDialerTests", "KnighDialerTests\KnightDialerTests.csproj", "{F012CD65-030D-480C-8A53-97E30BE5E73C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1B8C4FCE-74AB-48AC-B2DA-443EA85F1AD1} = {1B8C4FCE-74AB-48AC-B2DA-443EA85F1AD1}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B8C4FCE-74AB-48AC-B2DA-443EA85F1AD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B8C4FCE-74AB-48AC-B2DA-443EA85F1AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B8C4FCE-74AB-48AC-B2DA-443EA85F1AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B8C4FCE-74AB-48AC-B2DA-443EA85F1AD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F012CD65-030D-480C-8A53-97E30BE5E73C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F012CD65-030D-480C-8A53-97E30BE5E73C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F012CD65-030D-480C-8A53-97E30BE5E73C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F012CD65-030D-480C-8A53-97E30BE5E73C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0CB1B3C0-7EC3-49B8-BE9D-20BFAF96DE7A}
+	EndGlobalSection
+EndGlobal
