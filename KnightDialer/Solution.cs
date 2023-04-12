@@ -5,33 +5,34 @@ namespace KnightDialer
     public class Solution
     {
         private readonly KnightDialerClass _kd;
-        public Solution()
+        public Solution(ChessPiece pieceType)
         {
-            _kd = new KnightDialerClass();
+            var knightNeighbors = PhonePadGraphGenerator.GetGraph(pieceType);
+            long modulus = 1000000007;
+
+
+            _kd = new KnightDialerClass(knightNeighbors, 5000, modulus);
         }
         public int KnightDialer(int n)
         {
-            return (int)_kd.GetAmountOfDistinctNumbersOfLengthN(n);
+            int[] validStartingNodes = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            return (int)_kd.GetAmountOfDistinctNumbersOfLengthN(n, validStartingNodes);
         }
 
         private class KnightDialerClass
         {
-            private List<int>[] graphNeighbors = new List<int>[10]
-            {
-                new List<int> {4,6},
-                new List<int> {6,8},
-                new List<int> {7,9},
-                new List<int> {4,8},
-                new List<int> {3,9,0},
-                new List<int> {},
-                new List<int> {7,1,0},
-                new List<int> {2,6},
-                new List<int> {1,3},
-                new List<int> {2,4}
-            };
+            private readonly List<int>[] _graphNeighbors;
+            private readonly long _modulus;
+            private long?[,] _memoryArray;
 
-            private long?[,] memoryArray = new long?[10, 5000];
-            private long modulus = 1000000007;
+            public KnightDialerClass(List<int>[] graphAdjList, int maxN, long modulus)
+            {
+                _graphNeighbors = graphAdjList;
+                _memoryArray = new long?[graphAdjList.Length, maxN];
+                _modulus = modulus;
+            }
+           
+
 
             private long GetCountStartingOnKeyForN(int n, int startingKey)
             {
@@ -40,32 +41,32 @@ namespace KnightDialer
                     return 1;
                 }
 
-                var memory = memoryArray[startingKey, n];
+                var memory = _memoryArray[startingKey, n];
                 if (memory != null)
                 {
                     return (int)memory;
                 }
                 else
                 {
-                    var neighbors = graphNeighbors[startingKey];
+                    var neighbors = _graphNeighbors[startingKey];
                     long totalOfNeighbors = 0;
                     foreach (var neighbor in neighbors)
                     {
                         totalOfNeighbors += (GetCountStartingOnKeyForN(n - 1, neighbor));
                     }
-                    var modValue = totalOfNeighbors % modulus;
-                    memoryArray[startingKey, n] = modValue;
+                    var modValue = totalOfNeighbors % _modulus;
+                    _memoryArray[startingKey, n] = modValue;
                     return modValue;
                 }
             }
 
-            public long GetAmountOfDistinctNumbersOfLengthN(int n)
+            public long GetAmountOfDistinctNumbersOfLengthN(int n, int[] validStartingNodes)
             {
                 long total = 0;
-                for (int i = 0; i <= 9; i++)
+                foreach (var node in validStartingNodes)
                 {
-                    total += GetCountStartingOnKeyForN(n - 1, i);
-                    total = total % modulus;
+                    total += GetCountStartingOnKeyForN(n - 1, node);
+                    total = total % _modulus;
                 }
                 return total;
             }

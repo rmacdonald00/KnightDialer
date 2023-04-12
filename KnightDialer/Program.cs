@@ -10,27 +10,48 @@ namespace KnightDialer
         {
             Console.WriteLine("Solving LeetCode 935 Knight Dialer");
             Console.WriteLine("https://leetcode.com/problems/knight-dialer/");
-            Solution kd = new Solution();
-            List<int> dialableNumbers = new List<int>();
 
-            var startTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            for (int i = 1; i <= 5000; i++)
+            ChessPiece[] pieces = { 
+                ChessPiece.King, 
+                ChessPiece.Queen, 
+                ChessPiece.Knight, 
+                ChessPiece.Bishop, 
+                ChessPiece.Rook, 
+                ChessPiece.PawnUp, 
+                ChessPiece.PawnDown, 
+                ChessPiece.PawnRight, 
+                ChessPiece.PawnLeft };
+
+            var numToRun = 5000;
+
+            long totalTimeForAllPieces = 0;
+            foreach(var piece in pieces)
             {
-                dialableNumbers.Add(kd.KnightDialer(i));
+
+                Solution kd = new Solution(piece);
+                List<int> dialableNumbers = new List<int>();
+
+                var startTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                for (int i = 1; i <= numToRun; i++)
+                {
+                    dialableNumbers.Add(kd.KnightDialer(i));
+                }
+                var endTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+                totalTimeForAllPieces += endTime - startTime;
+                //for (int i = 0; i < dialableNumbers.Count; i++)
+                //{
+                //    Console.WriteLine($"{i + 1},{dialableNumbers[i]}");
+                //}
+
+                /*
+                 * Runs in ~7-9 ms
+                 */
+                Console.WriteLine("-------------------------------------------------------------------------------------------");
+                Console.WriteLine($"Piece: {piece}\nN={numToRun}: {dialableNumbers[numToRun-1]}\nStart: {startTime}\nEnd: {endTime}\nDifference: {endTime - startTime}ms");
+                Console.WriteLine("-------------------------------------------------------------------------------------------");
             }
-            var endTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-
-
-            for (int i = 0; i <= 4999; i++)
-            {
-                Console.WriteLine($"{i},{dialableNumbers[i]}");
-            }
-
-            /*
-             * Runs in ~7-9 ms
-             */
-
-            Console.WriteLine($"Start: {startTime}\nEnd: {endTime}\nDifference: {endTime - startTime}ms");
+            Console.WriteLine($"Total Time Taken: {totalTimeForAllPieces}");
         }
 
     }
