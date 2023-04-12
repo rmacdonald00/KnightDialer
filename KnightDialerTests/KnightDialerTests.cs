@@ -1,7 +1,7 @@
 using KnightDialer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace KnighDialerTests
+namespace KnightDialerTests
 {
     [TestClass]
     public class KnightDialerTests
